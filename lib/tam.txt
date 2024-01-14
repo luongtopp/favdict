@@ -1,0 +1,120 @@
+     showDialog(
+                              context: context,
+                              builder: (BuildContext context) {
+                                return AlertDialog(
+                                  backgroundColor: Color(0xFF216487),
+                                  title: Text(
+                                    'Xác nhận',
+                                    style: Theme.of(context)
+                                        .textTheme
+                                        .bodyMedium!
+                                        .copyWith(
+                                          fontSize: 19,
+                                        ),
+                                  ),
+                                  content: Text('Bạn có chắc chắn muốn xóa?'),
+                                  actions: [
+                                    TextButton(
+                                      onPressed: () {
+                                        Navigator.of(context)
+                                            .pop(false); // Không xóa
+                                      },
+                                      child: Text('Không',
+                                          style: Theme.of(context)
+                                              .textTheme
+                                              .bodyMedium!
+                                              .copyWith(
+                                                fontSize: 14,
+                                              )),
+                                    ),
+                                    TextButton(
+                                      onPressed: () {
+                                        setState(() {
+                                          items.clear();
+                                        });
+                                        Navigator.of(context).pop(true); //
+                                      },
+                                      child: Text('Xóa',
+                                          style: Theme.of(context)
+                                              .textTheme
+                                              .bodyMedium!
+                                              .copyWith(
+                                                fontSize: 14,
+                                              )),
+                                    ),
+                                  ],
+                                );
+                              },
+                            ).then((value) {
+                              if (value != null && value) {
+                                // Nếu người dùng xác nhận xóa, thực hiện hành động xóa ở đây
+                                print('Đã xóa!');
+                                // Thực hiện hành động xóa dữ liệu ở đây
+                              } else {
+                                // Nếu người dùng không xác nhận xóa, không làm gì
+                                print('Không xóa!');
+                              }
+                            })
+
+
+
+
+
+
+
+                             BottomNavigationBar(
+        backgroundColor: const Color(0xFF216487),
+        selectedItemColor: const Color(0xFFE4F3FF),
+        unselectedItemColor: const Color.fromARGB(255, 149, 163, 173),
+        elevation: 0,
+        items: const <BottomNavigationBarItem>[
+          BottomNavigationBarItem(
+            icon: Icon(Icons.home_outlined),
+            label: 'Trang chủ',
+          ),
+          BottomNavigationBarItem(
+            icon: (Icon(Icons.favorite)),
+            label: 'Danh mục',
+          ),
+        ],
+        onTap: (int index) {
+          setState(() {
+            currentPageIndex = index;
+          });
+        },
+        currentIndex: currentPageIndex,
+      ),
+
+
+
+
+
+
+//   void saveSearchHistory(String keyword) async {
+//     SharedPreferences prefs = await SharedPreferences.getInstance();
+//     List<String> searchHistory = prefs.getStringList('searchHistory') ?? [];
+//     searchHistory.add(keyword);
+//     prefs.setStringList('searchHistory', searchHistory);
+//   }
+
+//   Future<List<String>> getSearchHistory() async {
+//     SharedPreferences prefs = await SharedPreferences.getInstance();
+//     return prefs.getStringList('searchHistory') ?? [];
+//   }
+
+//   // Lưu dữ liệu
+//   void saveData(List<String> data) async {
+//     Directory directory = await getApplicationDocumentsDirectory();
+//     File file = File('${directory.path}/data.txt');
+//     String content = data.join('\n');
+//     await file.writeAsString(content);
+//   }
+
+// // Đọc dữ liệu
+//   Future<List<String>> readData() async {
+//     Directory directory = await getApplicationDocumentsDirectory();
+//     File file = File('${directory.path}/data.txt');
+//     String content = await file.readAsString();
+//     List<String> data = content.split('\n');
+//     return data;
+//   }
